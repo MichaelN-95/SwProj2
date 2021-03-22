@@ -4,11 +4,15 @@ public class GenericLinkedList<T> {
         int size; //size of list
 
         public void add(T val){
+            // check if list is empty / if this is the first addition to list
             if (size>0) {
+                //setting up the tail/end of the list and adding the value
                 Node prev = tail;
                 tail = new Node(val);
+
                 prev.next = tail;
             }
+            //if list is empty make this the first node
             else {
                 tail = new Node(val);
                 head = tail;
@@ -47,8 +51,8 @@ public class GenericLinkedList<T> {
             Node next;
             // Constructor to create a new node
             Node(T d) {
-               this.data = d;
-               this.next = null;
+               data = d;
+               next = null;
             }
         }
     }
