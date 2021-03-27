@@ -1,44 +1,64 @@
-public class GenericLinkedList<T> {
-        Node head; // head of list
-        Node tail; // tail of list
-        int size; //size of list
+public class GenericLinkedList<T> implements IList<T> {
+    Node head; // head of list
+    Node tail; // tail of list
+    int size; //size of list
 
-        public void add(T val){
-            // check if list is empty / if this is the first addition to list
-            if (size>0) {
+    public void addToStart(T elem)
+    {
+        Node newNode = new Node(elem);
+        newNode.next = head;
+        head = newNode;
+        size++;
+    }
+
+    public void printList() {
+        //us this to "walk" or traverse the list
+        Node current = head;
+        while(current != null){
+            System.out.print(current.data + ", ");
+            current = current.next;
+        }
+    }
+
+    public int size() {
+    return size;
+    }
+
+    @Override
+    public T remove(int index) {
+        return null;
+    }
+
+    @Override
+    public boolean remove(T elem) {
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public boolean contains(T element) {
+        return false;
+    }
+
+    @Override
+    public void add(T elem) {
+        if (size>0) {
                 //setting up the tail/end of the list and adding the value
                 Node prev = tail;
-                tail = new Node(val);
+                tail = new Node(elem);
 
                 prev.next = tail;
             }
             //if list is empty make this the first node
             else {
-                tail = new Node(val);
+                tail = new Node(elem);
                 head = tail;
             }
             size++;
-        }
-        public void addToStart(T val)
-        {
-            Node newNode = new Node(val);
-            newNode.next = head;
-            head = newNode;
-            size++;
-        }
-
-        public void printList()
-        {
-            //us this to "walk" or traverse the list
-            Node current = head;
-            while(current != null){
-                System.out.print(current.data + ", ");
-                current = current.next;
-            }
-        }
-
-    public int size() {
-        return size;
     }
 
     public T get(int i) {
@@ -55,6 +75,5 @@ public class GenericLinkedList<T> {
                next = null;
             }
         }
-    }
-
+}
 
