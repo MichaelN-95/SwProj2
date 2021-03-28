@@ -70,18 +70,32 @@ public class GenericLinkedList<T> implements IList<T> {
 //        System.out.println("elem called");
         Node leader = head; // the current node
         Node trailer ; // the previous node
+
+        //confirming elem is in the list
         if (contains(elem)){
+            //if the sent element is first in the list
             if (elem == head.data){
                 head = head.next;
                 return true;
+            }else if (elem== tail.data){
+                trailer = leader;
+                while (leader.next != null) {
+                    trailer = leader;
+                    leader = leader.next;
+                }
+                trailer.next = null;
+                tail = trailer;
+                size--;
+                return true;
+
             }else {
                 trailer = leader;
                 while (leader.next != null) {
                     if (leader.data.equals(elem)) {
-                        System.out.println("equals");
-                        trailer.next = leader.next;
-                        size--;
-                        return true;
+                            System.out.println("equals");
+                            trailer.next = leader.next;
+                            size--;
+                            return true;
                     }
                     leader = leader.next;
                 }

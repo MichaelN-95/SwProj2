@@ -41,7 +41,7 @@ public class SimpleGenericsTester {
 
         System.out.println(aTestList.contains("First add"));
 
-        System.out.println(aTestList.remove("gg add"));
+        System.out.println(aTestList.remove("Third add"));
         //testing remove via index
 //        aTestList.remove(5);
         printLinkedList("atestlist", aTestList);
@@ -57,10 +57,6 @@ public class SimpleGenericsTester {
     private static <T> void printLinkedList(String listName, GenericLinkedList<T> listToPrint) throws Exception {
         System.out.println(listName + " contains:");
         listToPrint.printList();
-//        for(int i = 0; i < listToPrint.size(); i++)
-//        {
-//            System.out.print(listToPrint.get(i) + " ");
-//        }
         System.out.println();
     }
 
