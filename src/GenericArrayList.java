@@ -1,3 +1,6 @@
+
+//TODO remove via index & elem
+
 public class GenericArrayList<T> implements IList<T>{
 
     //This will hold our data - remember an ArrayList is nothing more than a managed array
@@ -29,6 +32,7 @@ public class GenericArrayList<T> implements IList<T>{
      *
      * @param elem The data to be added to the end of the managed array
      */
+    @Override
     public void add(T elem)
     {
         growArrayIfNeeded(); //I've farmed this out to a private "helper" method
@@ -69,6 +73,7 @@ public class GenericArrayList<T> implements IList<T>{
      * @param index the location to be return
      * @return the data at buffer[index]
      */
+    @Override
     public T get(int index)
     {
         if(index >= nextFreeLoc)
@@ -78,13 +83,14 @@ public class GenericArrayList<T> implements IList<T>{
         return buffer[index];
     }
 
-    //as
+
     /**
      * Searches through the array to see if a matching element is present
      * Note: We already use this mechanism for one of the remove() methods.
      * @param elem element to search the array for
      * @return whether the element was present in the list or not
      */
+    @Override
     public boolean contains(T elem)
     {
         boolean matchFound = false;
@@ -100,6 +106,7 @@ public class GenericArrayList<T> implements IList<T>{
      *
      * @return whether the list is empty or not
      */
+    @Override
     public boolean isEmpty()
     {
         return (nextFreeLoc == 0);
@@ -109,12 +116,14 @@ public class GenericArrayList<T> implements IList<T>{
      *
      * @return the size (i.e. the number of elements stored) in the list
      */
+    @Override
     public int size()
     {
         //System.out.println(buffer.length);
         return nextFreeLoc;
     }
 
+    //TODO fix this
     @Override
     public T remove(int index) {
         //if it's valid
@@ -128,14 +137,16 @@ public class GenericArrayList<T> implements IList<T>{
         return null;
     }
 
-        /**
-         * Removes the first occurrence of an element from the array
-         * It does this by "closing the gap" after/if it finds a matching element in the array.
-         * @param elem the element to remove
-         */
+    /**
+     * Removes the first occurrence of an element from the array
+     * It does this by "closing the gap" after/if it finds a matching element in the array.
+     * @param elem the element to remove
+     */
+    //TODO fix this too
     @Override
     public boolean remove(T elem) {
         boolean matchFound = false;
+
             for (int index = 0; index < nextFreeLoc && !matchFound; index++)
             {
                 if(buffer[index].equals(index))
@@ -154,33 +165,33 @@ public class GenericArrayList<T> implements IList<T>{
     }
 
     /**
-         * Private helper method to check if the currently allocated space is full.
-         * If it is then it will allocate a bigger array, copy the contents, and set our
-         * instance field (buffer) to refer to the newly allocated space.
-         */
-        private void growArrayIfNeeded(){
-            if(nextFreeLoc == currentCapacity){
-                //Allocate double the space - that will keep us going for a while
-                T[] tempArr = (T[]) new Object[buffer.length * 2];
-                currentCapacity *= 2;
-                //copy from the old space into the new
-                for(int i = 0; i < buffer.length; i++){
-                    tempArr[i] = buffer[i];
-                }
-                //Now, update so that our managed array points at the newly created array
-                buffer = tempArr;
+     * Private helper method to check if the currently allocated space is full.
+     * If it is then it will allocate a bigger array, copy the contents, and set our
+     * instance field (buffer) to refer to the newly allocated space.
+     */
+    private void growArrayIfNeeded(){
+        if(nextFreeLoc == currentCapacity){
+            //Allocate double the space - that will keep us going for a while
+            T[] tempArr = (T[]) new Object[buffer.length * 2];
+            currentCapacity *= 2;
+            //copy from the old space into the new
+            for(int i = 0; i < buffer.length; i++){
+                tempArr[i] = buffer[i];
             }
+            //Now, update so that our managed array points at the newly created array
+            buffer = tempArr;
         }
+    }
 
-        @Override
-        public String toString()
+    @Override
+    public String toString()
+    {
+        String data = "";
+        for(int i = 0; i < nextFreeLoc; i++)
         {
-            String data = "";
-            for(int i = 0; i < nextFreeLoc; i++)
-            {
-                data += " " +buffer[i] + ",";
-            }
-
-            return "MyStringArrayList[" + data + " ]";
+            data += " " +buffer[i] + ",";
         }
+
+        return "MyStringArrayList[" + data + " ]";
+    }
 }

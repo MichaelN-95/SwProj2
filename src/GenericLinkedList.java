@@ -1,27 +1,19 @@
 import java.util.Locale;
 
+//TODO create loop method to go through items and reduce reuse code
 public class GenericLinkedList<T> implements IList<T> {
     Node head; // head of list
     Node tail; // tail of list
     int size; //size of list
 
-    public void addToStart(T elem)
-    {
+    public void addToStart(T elem) {
         Node newNode = new Node(elem);
         newNode.next = head;
         head = newNode;
         size++;
     }
 
-    public void printList() {
-        //us this to "walk" or traverse the list
-        Node current = head;
-        while(current != null){
-            System.out.print(current.data + ", ");
-            current = current.next;
-        }
-    }
-
+    @Override
     public int size() {
     return size;
     }
@@ -58,13 +50,13 @@ public class GenericLinkedList<T> implements IList<T> {
                 return removed.data;
             }
         }catch (NullPointerException e){
-            System.out.println("Index number does not exist");
+            System.out.println("Could not find item at index: " + index);
         }
 
         return null;
     }
 
-    //TODO remove last element fix
+    //TODO remove last element fix for int
     @Override
     public boolean remove(T elem) {
 //        System.out.println("elem called");
@@ -121,8 +113,6 @@ public class GenericLinkedList<T> implements IList<T> {
         return false;
     }
 
-
-
     @Override
     public void add(T elem) {
         if (size>0) {
@@ -140,10 +130,37 @@ public class GenericLinkedList<T> implements IList<T> {
             size++;
     }
 
+    @Override
     public T get(int i) {
-            return null;
+        int counter;
+        Node current;
+        if (i ==1){
+            return head.data;
+        }else {
+            try {
+                counter = 1; //beginning of the list
+                current = head;
+                while (counter != i) //while the position has not been found
+                {
+                    current = current.next;
+                    counter++;
+                }
+                return current.data;
+            }catch (NullPointerException e){
+                System.out.println("Could not find item at index: " +i);
+                return null;
+            }
+        }
     }
 
+    public void printList() {
+        //us this to "walk" or traverse the list
+        Node current = head;
+        while(current != null){
+            System.out.print(current.data + ", ");
+            current = current.next;
+        }
+    }
 
     /* Linked list Node*/
     private class Node{
