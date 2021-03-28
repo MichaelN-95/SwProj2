@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class GenericLinkedList<T> implements IList<T> {
     Node head; // head of list
     Node tail; // tail of list
@@ -26,6 +28,8 @@ public class GenericLinkedList<T> implements IList<T> {
 
     @Override
     public T remove(int index) {
+
+//        System.out.println("index called");
         int counter ; // the current position on the list
         Node leader ; // the current node
         Node trailer ; // the previous node
@@ -56,12 +60,33 @@ public class GenericLinkedList<T> implements IList<T> {
         }catch (NullPointerException e){
             System.out.println("Index number does not exist");
         }
+
         return null;
     }
 
+    //TODO remove last element fix
     @Override
     public boolean remove(T elem) {
-
+//        System.out.println("elem called");
+        Node leader = head; // the current node
+        Node trailer ; // the previous node
+        if (contains(elem)){
+            if (elem == head.data){
+                head = head.next;
+                return true;
+            }else {
+                trailer = leader;
+                while (leader.next != null) {
+                    if (leader.data.equals(elem)) {
+                        System.out.println("equals");
+                        trailer.next = leader.next;
+                        size--;
+                        return true;
+                    }
+                    leader = leader.next;
+                }
+            }
+        }
         return false;
     }
 
@@ -72,8 +97,17 @@ public class GenericLinkedList<T> implements IList<T> {
 
     @Override
     public boolean contains(T element) {
+        Node current = head;
+        while(current != null){
+            if(current.data.equals(element)){
+                return true;
+            }
+            current = current.next;
+        }
         return false;
     }
+
+
 
     @Override
     public void add(T elem) {

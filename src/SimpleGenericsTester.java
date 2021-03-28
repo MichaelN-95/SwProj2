@@ -4,12 +4,12 @@ public class SimpleGenericsTester {
         //setting up values for generic arraylist & printing them
         GenericArrayList<Integer> aList = new GenericArrayList<>();
         aList.add(5); aList.add(3); aList.add(8);
-        printArrayList("aList", aList);
+//        printArrayList("aList", aList);
 
         //setting up second array list
         GenericArrayList<String> aSecondList = new GenericArrayList<>();
         aSecondList.add("Tom"); aSecondList.add("Dick"); aSecondList.add("Harry");
-        printArrayList("aSecondList", aSecondList);
+//        printArrayList("aSecondList", aSecondList);
 
         //setting up linked list with
         GenericLinkedList<String> aThirdList = new GenericLinkedList<>();
@@ -33,14 +33,17 @@ public class SimpleGenericsTester {
 //        aThirdList.addToStart("Myself");
 //        aThirdList.addToStart("I");
 
-        System.out.println("aThirdList size:" + aThirdList.size);
-        System.out.println("aTestList size:" + aTestList.size);
-        printLinkedList("aThirdList", aThirdList);
+//        System.out.println("aThirdList size:" + aThirdList.size);
+//        System.out.println("aTestList size:" + aTestList.size);
+//        printLinkedList("aThirdList", aThirdList);
         printLinkedList("aTestList", aTestList);
-        printLinkedList("anIntList", anIntList);
+//        printLinkedList("anIntList", anIntList);
 
+        System.out.println(aTestList.contains("First add"));
+
+        System.out.println(aTestList.remove("gg add"));
         //testing remove via index
-        aTestList.remove(5);
+//        aTestList.remove(5);
         printLinkedList("atestlist", aTestList);
     }
     private static <T> void printArrayList(String listName, GenericArrayList<T> listToPrint) {
