@@ -38,6 +38,10 @@ public class SimpleGenericsTester {
         printLinkedList("aThirdList", aThirdList);
         printLinkedList("aTestList", aTestList);
         printLinkedList("anIntList", anIntList);
+
+        //testing remove via index
+        aTestList.remove(5);
+        printLinkedList("atestlist", aTestList);
     }
     private static <T> void printArrayList(String listName, GenericArrayList<T> listToPrint) {
         System.out.println(listName + " contains:");

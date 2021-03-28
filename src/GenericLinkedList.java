@@ -26,11 +26,42 @@ public class GenericLinkedList<T> implements IList<T> {
 
     @Override
     public T remove(int index) {
+        int counter ; // the current position on the list
+        Node leader ; // the current node
+        Node trailer ; // the previous node
+        Node removed;
+        try {
+            if (index == 1) // The head of the list is deleted
+            {
+                removed = head;
+                head = head.next; // The next node becomes the new head
+                size--; //dectement size of the list
+                return removed.data;
+            } else if (index > 1)// find the node at the desired position
+            {
+                counter = 1; //beginning of the list
+                leader = head;
+                trailer = leader;
+                while (counter != index) //while the position has not been found
+                {
+                    trailer = leader; // iterate through the list
+                    leader = leader.next;
+                    counter++;
+                }
+                removed = trailer.next;
+                trailer.next = leader.next; //delete the desired node
+                size--; //decrement size of the list
+                return removed.data;
+            }
+        }catch (NullPointerException e){
+            System.out.println("Index number does not exist");
+        }
         return null;
     }
 
     @Override
     public boolean remove(T elem) {
+
         return false;
     }
 
@@ -65,8 +96,9 @@ public class GenericLinkedList<T> implements IList<T> {
             return null;
     }
 
+
     /* Linked list Node*/
-        private class Node{
+    private class Node{
             T data;
             Node next;
             // Constructor to create a new node
