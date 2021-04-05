@@ -7,7 +7,7 @@ public class GenericArrayList<T> implements IList<T>{
     private T[] buffer;
 
     //Index of next free location - will also help us to determine if the buffer is full
-    private int nextFreeLoc;
+    private int size;
 
     // This will change as buffer fills up and we allocate more and more storage space
     private int currentCapacity;
@@ -16,7 +16,7 @@ public class GenericArrayList<T> implements IList<T>{
     //Default Constructor
     public GenericArrayList(){
         currentCapacity = INITIAL_CAPACITY;
-        nextFreeLoc = 0;
+        size = 0;
         buffer = (T[]) new Object[currentCapacity];
     }
 
@@ -37,7 +37,7 @@ public class GenericArrayList<T> implements IList<T>{
     {
         growArrayIfNeeded(); //I've farmed this out to a private "helper" method
 
-        buffer[nextFreeLoc++] = elem;
+        buffer[size++] = elem;
     }
 
 
@@ -50,14 +50,14 @@ public class GenericArrayList<T> implements IList<T>{
     public void add(int index, T elem)
     {
         //if it's valid
-        if (index <= nextFreeLoc)
+        if (index <= size)
         {
             //Make sure that we "grow" the array if needed.
             growArrayIfNeeded();
 
             //shuffle everything up from right to left //Note that this is a much easier mechanism to implement than trying to insert the new
             //element and then shuffle everything from left to right
-            for (int i = nextFreeLoc; i > index; i--)
+            for (int i = size; i > index; i--)
             {
                 buffer[i] = buffer[i-1];
             }
@@ -65,7 +65,7 @@ public class GenericArrayList<T> implements IList<T>{
             //Now everything has moved up we can simply insert the new element
             buffer[index] = elem;
             //Obviously, we've added an extra element so we must update to reflect this
-            nextFreeLoc++;
+            size++;
         }
     }
     /** Retrieve an element from the list
@@ -76,7 +76,7 @@ public class GenericArrayList<T> implements IList<T>{
     @Override
     public T get(int index)
     {
-        if(index >= nextFreeLoc)
+        if(index >= size)
         {
             return null;
         }
@@ -94,7 +94,7 @@ public class GenericArrayList<T> implements IList<T>{
     public boolean contains(T elem)
     {
         boolean matchFound = false;
-        for (int index = 0; index < nextFreeLoc && !matchFound; index++){
+        for (int index = 0; index <= size && !matchFound; index++){
             if(buffer[index].equals(elem)){
                 matchFound = true;
             }
@@ -109,7 +109,7 @@ public class GenericArrayList<T> implements IList<T>{
     @Override
     public boolean isEmpty()
     {
-        return (nextFreeLoc == 0);
+        return (size == 0);
     }
 
     /**
@@ -120,21 +120,18 @@ public class GenericArrayList<T> implements IList<T>{
     public int size()
     {
         //System.out.println(buffer.length);
-        return nextFreeLoc;
+        return size;
     }
 
     //TODO fix this
     @Override
     public T remove(int index) {
-        //if it's valid
-            if (index <= nextFreeLoc) {
-                //Close the gap - move elements 1 position to the left
-                for (int i = index; i < nextFreeLoc; i++) {
-                    buffer[i] = buffer[i + 1];
-                }
-                nextFreeLoc--;
-            }
-        return null;
+        if(index>=size || index < 0 ){throw new RuntimeException("Invalid index");}
+        T element = (T) buffer[index];
+        --size;
+        System.arraycopy(buffer, index + 1, buffer, index, size - index);
+        buffer[size] = null;
+        return element;
     }
 
     /**
@@ -146,19 +143,17 @@ public class GenericArrayList<T> implements IList<T>{
     @Override
     public boolean remove(T elem) {
         boolean matchFound = false;
+            if (contains(elem)) {
+                for (int index = 0; index < size && !matchFound; index++) {
+                    if (buffer[index].equals(index)) {
+                        matchFound = true;
 
-            for (int index = 0; index < nextFreeLoc && !matchFound; index++)
-            {
-                if(buffer[index].equals(index))
-                {
-                    matchFound = true;
-
-                    //Close the gap - move elements 1 position to the left
-                    for( int i = index; i<nextFreeLoc; i++)
-                    {
-                        buffer[i] = buffer[i+1];
+                        //Close the gap - move elements 1 position to the left
+                        for (int i = index; i < size; i++) {
+                            buffer[i] = buffer[i + 1];
+                        }
+                        size--;
                     }
-                    nextFreeLoc--;
                 }
             }
         return matchFound;
@@ -170,7 +165,7 @@ public class GenericArrayList<T> implements IList<T>{
      * instance field (buffer) to refer to the newly allocated space.
      */
     private void growArrayIfNeeded(){
-        if(nextFreeLoc == currentCapacity){
+        if(size == currentCapacity){
             //Allocate double the space - that will keep us going for a while
             T[] tempArr = (T[]) new Object[buffer.length * 2];
             currentCapacity *= 2;
@@ -187,7 +182,7 @@ public class GenericArrayList<T> implements IList<T>{
     public String toString()
     {
         String data = "";
-        for(int i = 0; i < nextFreeLoc; i++)
+        for(int i = 0; i < size; i++)
         {
             data += " " +buffer[i] + ",";
         }

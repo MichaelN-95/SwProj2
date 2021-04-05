@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 public class SimpleGenericsTester {
     public static void main(String[] args) throws Exception {
-
+        ArrayList<String>tests = new ArrayList<>();
         arrayListTest();
 //       linkedListTest();
-
+//        tests.remove(1);
 
 
     }
@@ -44,15 +46,18 @@ public class SimpleGenericsTester {
     private static void arrayListTest(){
         //setting up values for generic arraylist & printing them
         GenericArrayList<Integer> aList = new GenericArrayList<>();
-        aList.add(5); aList.add(3); aList.add(8);
+        GenericArrayList<String> aSList = new GenericArrayList<>();
+        aList.add(1); aList.add(2); aList.add(33);
+        aSList.add("Michael"); aSList.add("Fionn"); aSList.add("Kerri");
         printArrayList("aList", aList);
 
         //setting up second array list
 //        GenericArrayList<String> arrayList = new GenericArrayList<>();
 //        arrayList.add("Tom"); arrayList.add("Dick"); arrayList.add("Harry");
 //        printArrayList("arrayList", arrayList);
-
-        System.out.println(aList.remove(1));
+//        System.out.println(aSList.contains("Kerri"));
+        System.out.println("remove" + aList.remove(2));
+//        System.out.println(aSList.contains("Fionn"));
         printArrayList("aList", aList);
     }
 
