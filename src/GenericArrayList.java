@@ -123,7 +123,7 @@ public class GenericArrayList<T> implements IList<T>{
         return size;
     }
 
-    //TODO fix this
+    //TODO Comment Code
     @Override
     public T remove(int index) {
         if(index>=size || index < 0 ){throw new RuntimeException("Invalid index");}
