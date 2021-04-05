@@ -49,16 +49,16 @@ public class SimpleGenericsTester {
         GenericArrayList<String> aSList = new GenericArrayList<>();
         aList.add(1); aList.add(2); aList.add(33);
         aSList.add("Michael"); aSList.add("Fionn"); aSList.add("Kerri");
-        printArrayList("aList", aList);
+        printArrayList("aSList", aSList);
 
         //setting up second array list
 //        GenericArrayList<String> arrayList = new GenericArrayList<>();
 //        arrayList.add("Tom"); arrayList.add("Dick"); arrayList.add("Harry");
 //        printArrayList("arrayList", arrayList);
 //        System.out.println(aSList.contains("Kerri"));
-        System.out.println("remove" + aList.remove(2));
+        System.out.println("remove" + aSList.remove("Michael"));
 //        System.out.println(aSList.contains("Fionn"));
-        printArrayList("aList", aList);
+        printArrayList("aSList", aSList);
     }
 
 

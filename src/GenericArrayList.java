@@ -123,7 +123,6 @@ public class GenericArrayList<T> implements IList<T>{
         return size;
     }
 
-    //TODO Comment Code
     @Override
     public T remove(int index) {
         if(index>=size || index < 0 ){throw new RuntimeException("Invalid index");}
@@ -139,20 +138,16 @@ public class GenericArrayList<T> implements IList<T>{
      * It does this by "closing the gap" after/if it finds a matching element in the array.
      * @param elem the element to remove
      */
-    //TODO fix this too
     @Override
     public boolean remove(T elem) {
         boolean matchFound = false;
             if (contains(elem)) {
                 for (int index = 0; index < size && !matchFound; index++) {
-                    if (buffer[index].equals(index)) {
+                    if (buffer[index].equals(elem)) {
                         matchFound = true;
-
-                        //Close the gap - move elements 1 position to the left
-                        for (int i = index; i < size; i++) {
-                            buffer[i] = buffer[i + 1];
-                        }
-                        size--;
+                        --size;
+                        System.arraycopy(buffer, index + 1, buffer, index, size - index);
+                        buffer[size] = null;
                     }
                 }
             }
