@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SimpleGenericsTester {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ArrayList<String>tests = new ArrayList<>();
         arrayListTest();
-//       linkedListTest();
+       linkedListTest();
 //        tests.remove(1);
 
 
@@ -17,7 +18,7 @@ public class SimpleGenericsTester {
  //        aThirdList.addToStart("second");
  aThirdList.addToStart("Third"); */
 
-        //prooving generic usablity for linked list
+        //proving generic usability for linked list
         /**  GenericLinkedList<Integer> anIntList = new GenericLinkedList<>();
          anIntList.add(1);
          anIntList.add(2);
@@ -50,6 +51,12 @@ public class SimpleGenericsTester {
         aList.add(1); aList.add(2); aList.add(33);
         aSList.add("Michael"); aSList.add("Fionn"); aSList.add("Kerri");
         printArrayList("aSList", aSList);
+
+        //And here is an example of normal usage of iterators to traverse a collection
+        for (Integer integer : (Iterable<Integer>) aList) {
+            System.out.println("iterator");
+            System.out.print(integer + " ");
+        }
 
         //setting up second array list
 //        GenericArrayList<String> arrayList = new GenericArrayList<>();

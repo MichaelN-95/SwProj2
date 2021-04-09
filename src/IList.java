@@ -1,4 +1,6 @@
-public interface IList <T> {
+import java.util.Iterator;
+
+public interface IList <T> extends Iterable {
     /**
      * Add an element to the end of the list
      * @param elem element to be added
@@ -26,5 +28,6 @@ public interface IList <T> {
      */
     public boolean contains(T element);
 
+    public Iterator<T> iterator();
 
 }

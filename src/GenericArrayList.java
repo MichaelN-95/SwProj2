@@ -1,7 +1,12 @@
 
 //TODO remove via index & elem
 
-public class GenericArrayList<T> implements IList<T>{
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
+public class GenericArrayList<T> implements IList<T>, Iterable {
 
     //This will hold our data - remember an ArrayList is nothing more than a managed array
     private T[] buffer;
@@ -19,8 +24,6 @@ public class GenericArrayList<T> implements IList<T>{
         size = 0;
         buffer = (T[]) new Object[currentCapacity];
     }
-
-
     /** Add to the end of the list.
      *
      * Each time you need to grow the array you should declare a temporary array
@@ -33,8 +36,7 @@ public class GenericArrayList<T> implements IList<T>{
      * @param elem The data to be added to the end of the managed array
      */
     @Override
-    public void add(T elem)
-    {
+    public void add(T elem){
         growArrayIfNeeded(); //I've farmed this out to a private "helper" method
 
         buffer[size++] = elem;
@@ -47,8 +49,7 @@ public class GenericArrayList<T> implements IList<T>{
      * Also, remember to "grow" the managed array, if required. * @param index where to insert (ignore if greater than nextFreeLoc - otherwise you'll get gaps)
      * @param elem the data to insert
      */
-    public void add(int index, T elem)
-    {
+    public void add(int index, T elem){
         //if it's valid
         if (index <= size)
         {
@@ -74,8 +75,7 @@ public class GenericArrayList<T> implements IList<T>{
      * @return the data at buffer[index]
      */
     @Override
-    public T get(int index)
-    {
+    public T get(int index){
         if(index >= size)
         {
             return null;
@@ -101,6 +101,8 @@ public class GenericArrayList<T> implements IList<T>{
         }
         return matchFound;
     }
+
+
 
     /**
      *
@@ -184,4 +186,33 @@ public class GenericArrayList<T> implements IList<T>{
 
         return "MyStringArrayList[" + data + " ]";
     }
+
+
+
+    @Override
+    public Iterator<T> iterator() {
+        return new GenericArrayListIterator();
+    }
+    //This is an inner-class of the GenericArrayList class
+    class GenericArrayListIterator implements Iterator<T>{
+        private int cursor = 0;
+        @Override
+        public boolean hasNext() {
+            return cursor < size;
+        }
+
+        @Override
+        public T next() {
+            if(cursor == size){
+                throw new NoSuchElementException();
+            }
+            return buffer[cursor++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("not supported yet");
+        }
+    }
 }
+

@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Locale;
 
 //TODO create loop method to go through items and reduce reuse code
@@ -111,6 +112,11 @@ public class GenericLinkedList<T> implements IList<T> {
             current = current.next;
         }
         return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
     }
 
     @Override
