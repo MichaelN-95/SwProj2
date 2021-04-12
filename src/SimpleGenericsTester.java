@@ -24,10 +24,15 @@ public class SimpleGenericsTester {
          anIntList.add(2);
          anIntList.addToStart(3);*/
 
-        /** GenericLinkedList<String> aTestList = new GenericLinkedList<>();
+        GenericLinkedList<String> aTestList = new GenericLinkedList<>();
          aTestList.add("First add");
          aTestList.add("Second add");
-         aTestList.add("Third add");*/
+         aTestList.add("Third add");
+
+        for (String string : (Iterable<String>) aTestList) {
+            System.out.println();
+            System.out.print(string + " ");
+        }
 
 /** testing stuff for linked lists */
 //        aThirdList.addToStart("Me");
@@ -54,7 +59,7 @@ public class SimpleGenericsTester {
 
         //And here is an example of normal usage of iterators to traverse a collection
         for (Integer integer : (Iterable<Integer>) aList) {
-            System.out.println("iterator");
+            System.out.println();
             System.out.print(integer + " ");
         }
 

@@ -1,5 +1,7 @@
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 //TODO create loop method to go through items and reduce reuse code
 public class GenericLinkedList<T> implements IList<T> {
@@ -114,10 +116,7 @@ public class GenericLinkedList<T> implements IList<T> {
         return false;
     }
 
-    @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
+
 
     @Override
     public void add(T elem) {
@@ -168,6 +167,30 @@ public class GenericLinkedList<T> implements IList<T> {
         }
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new GenericLinkedListIterator();
+    }
+    class GenericLinkedListIterator implements Iterator<T>{
+        Node check = head;
+        int cursor = 0;
+        @Override
+        public boolean hasNext() {
+            return cursor < size;
+        }
+
+        @Override
+        public T next() {
+            if (cursor== size)throw new NoSuchElementException();
+            cursor++;
+            return get(cursor);
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("not supported yet");
+        }
+    }
     /* Linked list Node*/
     private class Node{
             T data;
