@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Stack;
 
 public class SimpleGenericsTester {
     public static void main(String[] args) {
         ArrayList<String>tests = new ArrayList<>();
-        arrayListTest();
-       linkedListTest();
+//        arrayListTest();
+//       linkedListTest();
+       stackTest();
 //        tests.remove(1);
 
 
@@ -53,9 +55,9 @@ public class SimpleGenericsTester {
         //setting up values for generic arraylist & printing them
         GenericArrayList<Integer> aList = new GenericArrayList<>();
         GenericArrayList<String> aSList = new GenericArrayList<>();
+        Stack<Integer> stack = new Stack<>();
         aList.add(1); aList.add(2); aList.add(33);
         aSList.add("Michael"); aSList.add("Fionn"); aSList.add("Kerri");
-        printArrayList("aSList", aSList);
 
         //And here is an example of normal usage of iterators to traverse a collection
         for (Integer integer : (Iterable<Integer>) aList) {
@@ -70,22 +72,11 @@ public class SimpleGenericsTester {
 //        System.out.println(aSList.contains("Kerri"));
         System.out.println("remove" + aSList.remove("Michael"));
 //        System.out.println(aSList.contains("Fionn"));
-        printArrayList("aSList", aSList);
     }
 
-
-    private static <T> void printArrayList(String listName, GenericArrayList<T> listToPrint) {
-        System.out.println(listName + " contains:");
-        for(int i = 0; i < listToPrint.size(); i++)
-        {
-            System.out.print(listToPrint.get(i) + " ");
-        }
-        System.out.println("\n");
+    private static void stackTest(){
+        GenericStack<Integer> numStack= new GenericStack<>();
+        numStack.push(3);numStack.push(6);numStack.push(9);
+        System.out.println(numStack.peek());
     }
-    private static <T> void printLinkedList(String listName, GenericLinkedList<T> listToPrint) throws Exception {
-        System.out.println(listName + " contains:");
-        listToPrint.printList();
-        System.out.println();
-    }
-
 }

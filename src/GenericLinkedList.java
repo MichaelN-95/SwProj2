@@ -3,7 +3,8 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-//TODO create loop method to go through items and reduce reuse code
+//TODO Clean up code and comment
+
 public class GenericLinkedList<T> implements IList<T> {
     Node head; // head of list
     Node tail; // tail of list
