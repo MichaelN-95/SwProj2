@@ -1,4 +1,3 @@
-import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
@@ -95,12 +94,11 @@ public class SimpleGenericsTester {
 
 
 //       }
-        Iterator<Integer> iterator = numStack.iterator();
+        Iterator<Integer> iteratorI = numStack.iterator();
+        Iterator<String> iteratorS = strStack.iterator();
+        iterateInt(iteratorI);
+        iterateString(iteratorS);
 
-        while(iterator.hasNext())
-        {
-            System.out.print(iterator.next() + " ");
-        }
 
         //TODO fix this
         /* for (Integer integer : (Iterable<Integer>) numStack.iterator()) {
@@ -108,4 +106,20 @@ public class SimpleGenericsTester {
             System.out.print(integer + " ");
         }*/
     }
+    private static void iterateInt(Iterator<Integer> b){
+        while(b.hasNext())
+        {
+            System.out.print(b.next() + " ");
+        }
+        System.out.println("\n");
+    }
+
+    private static void iterateString(Iterator<String> b){
+        while(b.hasNext())
+        {
+            System.out.print(b.next() + " ");
+        }
+        System.out.println("\n");
+    }
+
 }
