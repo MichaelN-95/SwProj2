@@ -60,7 +60,6 @@ public class GenericLinkedList<T> implements IList<T> {
         return null;
     }
 
-    //TODO remove last element fix for int
     @Override
     public boolean remove(T elem) {
 //        System.out.println("elem called");
@@ -117,7 +116,14 @@ public class GenericLinkedList<T> implements IList<T> {
         return false;
     }
 
-
+    @Override
+    public String toString() {
+        return "GenericLinkedList{" +
+                "head=" + head +
+                ", tail=" + tail +
+                ", size=" + size +
+                '}';
+    }
 
     @Override
     public void add(T elem) {
@@ -172,8 +178,8 @@ public class GenericLinkedList<T> implements IList<T> {
     public Iterator<T> iterator() {
         return new GenericLinkedListIterator();
     }
+
     class GenericLinkedListIterator implements Iterator<T>{
-        Node check = head;
         int cursor = 0;
         @Override
         public boolean hasNext() {

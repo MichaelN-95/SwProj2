@@ -1,3 +1,4 @@
+import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
@@ -5,16 +6,17 @@ import java.util.Stack;
 public class SimpleGenericsTester {
     public static void main(String[] args) {
         ArrayList<String>tests = new ArrayList<>();
-//        arrayListTest();
-//       linkedListTest();
-       stackTest();
+        arrayListTest(false);
+       linkedListTest(false);
+       stackTest(true);
 //        tests.remove(1);
 
 
     }
 
-    private static void linkedListTest(){
-        //setting up linked list with
+    private static void linkedListTest(boolean b){
+
+        if(b){//setting up linked list with
 /**        GenericLinkedList<String> aThirdList = new GenericLinkedList<>();
  //        aThirdList.addToStart("First");
  //        aThirdList.addToStart("second");
@@ -50,33 +52,60 @@ public class SimpleGenericsTester {
         //testing remove via index
 //        aTestList.remove(5);
 //        printLinkedList("atestlist", aTestList);
-    }
-    private static void arrayListTest(){
-        //setting up values for generic arraylist & printing them
-        GenericArrayList<Integer> aList = new GenericArrayList<>();
-        GenericArrayList<String> aSList = new GenericArrayList<>();
-        Stack<Integer> stack = new Stack<>();
-        aList.add(1); aList.add(2); aList.add(33);
-        aSList.add("Michael"); aSList.add("Fionn"); aSList.add("Kerri");
-
-        //And here is an example of normal usage of iterators to traverse a collection
-        for (Integer integer : (Iterable<Integer>) aList) {
-            System.out.println();
-            System.out.print(integer + " ");
         }
+    }
+    private static void arrayListTest(boolean b){
+        //setting up values for generic arraylist & printing them
+        if(b) {
+            GenericArrayList<Integer> aList = new GenericArrayList<>();
+            GenericArrayList<String> aSList = new GenericArrayList<>();
+            Stack<Integer> stack = new Stack<>();
+            aList.add(1);
+            aList.add(2);
+            aList.add(33);
+            aSList.add("Michael");
+            aSList.add("Fionn");
+            aSList.add("Kerri");
 
-        //setting up second array list
+            //And here is an example of normal usage of iterators to traverse a collection
+            for (Integer integer : (Iterable<Integer>) aList) {
+                System.out.println();
+                System.out.print(integer + " ");
+            }
+
+            //setting up second array list
 //        GenericArrayList<String> arrayList = new GenericArrayList<>();
 //        arrayList.add("Tom"); arrayList.add("Dick"); arrayList.add("Harry");
 //        printArrayList("arrayList", arrayList);
 //        System.out.println(aSList.contains("Kerri"));
-        System.out.println("remove" + aSList.remove("Michael"));
+            System.out.println("remove" + aSList.remove("Michael"));
 //        System.out.println(aSList.contains("Fionn"));
+        }
     }
 
-    private static void stackTest(){
-        GenericStack<Integer> numStack= new GenericStack<>();
-        numStack.push(3);numStack.push(6);numStack.push(9);
-        System.out.println(numStack.peek());
+    private static void stackTest(boolean b){
+//       if (b) {
+           GenericStack<Integer> numStack = new GenericStack<Integer>();
+           numStack.push(2);numStack.push(6);numStack.push(9);numStack.push(69);
+           GenericStack<String> strStack = new GenericStack<>();
+
+           strStack.push("michael");strStack.push("fionn");strStack.push("kerri");
+//           System.out.println(numStack.pop());
+           System.out.println(numStack.peek());
+
+
+//       }
+        Iterator<Integer> iterator = numStack.iterator();
+
+        while(iterator.hasNext())
+        {
+            System.out.print(iterator.next() + " ");
+        }
+
+        //TODO fix this
+        /* for (Integer integer : (Iterable<Integer>) numStack.iterator()) {
+            System.out.println();
+            System.out.print(integer + " ");
+        }*/
     }
 }

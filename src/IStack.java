@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public interface IStack <T>{
 
     /**
@@ -26,4 +28,6 @@ public interface IStack <T>{
      * no items; {@code false} otherwise.
      */
     public boolean empty();
+
+    public Iterator<T> iterator();
 }
