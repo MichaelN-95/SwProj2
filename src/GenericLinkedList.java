@@ -1,7 +1,10 @@
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
-//TODO create loop method to go through items and reduce reuse code
+//TODO Clean up code and comment
+
 public class GenericLinkedList<T> implements IList<T> {
     Node head; // head of list
     Node tail; // tail of list
@@ -57,7 +60,6 @@ public class GenericLinkedList<T> implements IList<T> {
         return null;
     }
 
-    //TODO remove last element fix for int
     @Override
     public boolean remove(T elem) {
 //        System.out.println("elem called");
@@ -115,8 +117,12 @@ public class GenericLinkedList<T> implements IList<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return null;
+    public String toString() {
+        return "GenericLinkedList{" +
+                "head=" + head +
+                ", tail=" + tail +
+                ", size=" + size +
+                '}';
     }
 
     @Override
@@ -168,6 +174,30 @@ public class GenericLinkedList<T> implements IList<T> {
         }
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new GenericLinkedListIterator();
+    }
+
+    class GenericLinkedListIterator implements Iterator<T>{
+        int cursor = 0;
+        @Override
+        public boolean hasNext() {
+            return cursor < size;
+        }
+
+        @Override
+        public T next() {
+            if (cursor== size)throw new NoSuchElementException();
+            cursor++;
+            return get(cursor);
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("not supported yet");
+        }
+    }
     /* Linked list Node*/
     private class Node{
             T data;

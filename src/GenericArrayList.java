@@ -1,12 +1,12 @@
 
-//TODO remove via index & elem
+//TODO Clean up code and comment
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class GenericArrayList<T> implements IList<T>, Iterable {
+public class GenericArrayList<T> implements IList<T> {
 
     //This will hold our data - remember an ArrayList is nothing more than a managed array
     private T[] buffer;
@@ -186,8 +186,6 @@ public class GenericArrayList<T> implements IList<T>, Iterable {
 
         return "MyStringArrayList[" + data + " ]";
     }
-
-
 
     @Override
     public Iterator<T> iterator() {
