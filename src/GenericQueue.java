@@ -1,4 +1,13 @@
+import java.util.Iterator;
+
 public class GenericQueue<T> implements IQueue<T>{
+
+    private GenericArrayList<T> queue ;
+
+    public GenericQueue() {
+        queue= new GenericArrayList<T>();
+    }
+
     /**
      * Inserts the specified element into the queue
      *
@@ -6,7 +15,7 @@ public class GenericQueue<T> implements IQueue<T>{
      */
     @Override
     public void enqueue(T element) {
-
+        queue.add(element);
     }
 
     /**
@@ -16,7 +25,17 @@ public class GenericQueue<T> implements IQueue<T>{
      */
     @Override
     public T dequeue() {
-        return null;
+        if (queue.isEmpty())
+        {
+            System.out.println("There are no elements to remove");
+            return null;
+
+        }else
+        {
+            T firstElement = queue.get(0);
+            queue.remove(0);
+            return firstElement;
+        }
     }
 
     /**
@@ -26,7 +45,7 @@ public class GenericQueue<T> implements IQueue<T>{
      */
     @Override
     public T first() {
-        return null;
+        return queue.get(0);
     }
 
     /**
@@ -37,6 +56,12 @@ public class GenericQueue<T> implements IQueue<T>{
      */
     @Override
     public boolean empty() {
-        return false;
+        return queue.isEmpty();
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return queue.iterator();
+    }
+
 }

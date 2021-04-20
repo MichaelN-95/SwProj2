@@ -4,11 +4,10 @@ import java.util.Stack;
 
 public class SimpleGenericsTester {
     public static void main(String[] args) {
-        ArrayList<String>tests = new ArrayList<>();
         arrayListTest(false);
-       linkedListTest(false);
-       stackTest(true);
-//        tests.remove(1);
+        linkedListTest(false);
+        stackTest(true);
+        queueTest(true);
 
 
     }
@@ -66,45 +65,49 @@ public class SimpleGenericsTester {
             aSList.add("Fionn");
             aSList.add("Kerri");
 
-            //And here is an example of normal usage of iterators to traverse a collection
-            for (Integer integer : (Iterable<Integer>) aList) {
-                System.out.println();
-                System.out.print(integer + " ");
-            }
+            Iterator<Integer> iteratorI = aList.iterator();
+            iterateInt(iteratorI);
 
             //setting up second array list
 //        GenericArrayList<String> arrayList = new GenericArrayList<>();
 //        arrayList.add("Tom"); arrayList.add("Dick"); arrayList.add("Harry");
 //        printArrayList("arrayList", arrayList);
 //        System.out.println(aSList.contains("Kerri"));
-            System.out.println("remove" + aSList.remove("Michael"));
+            System.out.println("remove" + aList.remove(2));
 //        System.out.println(aSList.contains("Fionn"));
+            iterateInt(iteratorI);
         }
     }
 
     private static void stackTest(boolean b){
-//       if (b) {
+       if (b) {
            GenericStack<Integer> numStack = new GenericStack<Integer>();
            numStack.push(2);numStack.push(6);numStack.push(9);numStack.push(69);
            GenericStack<String> strStack = new GenericStack<>();
 
            strStack.push("michael");strStack.push("fionn");strStack.push("kerri");
-//           System.out.println(numStack.pop());
+           System.out.println(numStack.pop());
            System.out.println(numStack.peek());
 
+           /* setting up and iterating through items  */
+           Iterator<Integer> iteratorI = numStack.iterator();
+           Iterator<String> iteratorS = strStack.iterator();
+           iterateInt(iteratorI);
+           iterateString(iteratorS);
+       }
 
-//       }
-        Iterator<Integer> iteratorI = numStack.iterator();
-        Iterator<String> iteratorS = strStack.iterator();
-        iterateInt(iteratorI);
-        iterateString(iteratorS);
+    }
 
+    private static void queueTest(boolean b){
+        if (b){
+            GenericQueue<Integer> intQ = new GenericQueue<Integer>();
 
-        //TODO fix this
-        /* for (Integer integer : (Iterable<Integer>) numStack.iterator()) {
-            System.out.println();
-            System.out.print(integer + " ");
-        }*/
+            intQ.enqueue(1);intQ.enqueue(22);intQ.enqueue(69);
+
+            System.out.println(intQ.first());
+            Iterator<Integer> iteratorI = intQ.iterator();
+            iterateInt(iteratorI);
+        }
     }
     private static void iterateInt(Iterator<Integer> b){
         while(b.hasNext())

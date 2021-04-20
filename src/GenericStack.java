@@ -58,40 +58,6 @@ public class GenericStack<T> implements IStack<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return new GenericStackIterator<T>();
-    }
-
-    class GenericStackIterator<T> implements Iterator<T>{
-        int cursor = 0;
-        /**
-         * Returns {@code true} if the iteration has more elements.
-         * (In other words, returns {@code true} if {@link #next} would
-         * return an element rather than throwing an exception.)
-         *
-         * @return {@code true} if the iteration has more elements
-         */
-        @Override
-        public boolean hasNext() {
-             return cursor < stack.size;
-        }
-
-        /**
-         * Returns the next element in the iteration.
-         *
-         * @return the next element in the iteration
-         * @throws NoSuchElementException if the iteration has no more elements
-         */
-        @Override
-        public T next() {
-            if (cursor== stack.size)throw new NoSuchElementException();
-            cursor++;
-            return (T) stack.get(cursor);
-        }
-    }
-    @Override
-    public String toString() {
-        return "GenericStack{" +
-                "stack=" + stack.toString()+
-                '}';
+        return stack.iterator();
     }
 }
