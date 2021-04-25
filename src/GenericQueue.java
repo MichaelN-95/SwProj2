@@ -8,6 +8,10 @@ public class GenericQueue<T> implements IQueue<T>, Iterable<T>{
         queue= new GenericArrayList<T>();
     }
 
+    public GenericQueue(GenericLinkedList<T> list) {
+        queue=list;
+    }
+
     /**
      * Inserts the specified element into the queue
      *
@@ -30,12 +34,7 @@ public class GenericQueue<T> implements IQueue<T>, Iterable<T>{
             System.out.println("There are no elements to remove");
             return null;
 
-        }else
-        {
-            T firstElement = queue.get(0);
-            queue.remove(0);
-            return firstElement;
-        }
+        }else return this.queue.remove(0);
     }
 
     /**

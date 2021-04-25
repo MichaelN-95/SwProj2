@@ -7,16 +7,20 @@ public class SimpleGenericsTester {
     public static void main(String[] args) {
 //        arrayListTest(true);
         try {
-//            linkedListTest(true);
+            linkedListTest(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            stackTest(true);
+            stackTest(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        queueTest(true);
+        try {
+            queueTest(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -105,14 +109,18 @@ public class SimpleGenericsTester {
     private static void queueTest(boolean b) throws Exception {
         if (b){
             GenericQueue<Integer> intQ = new GenericQueue<Integer>();
-
+            GenericLinkedList<Integer> anIntList = new GenericLinkedList<>();
             //fix this
-//            GenericStack<Integer> test = new GenericStack<Integer>(anIntList);
+            GenericQueue<Integer> test = new GenericQueue<>(anIntList);
+
+            test.enqueue(1);test.enqueue(2);test.enqueue(3);test.enqueue(4);
             intQ.enqueue(1);intQ.enqueue(22);intQ.enqueue(69);
 
-            System.out.println(intQ.first());
+//            System.out.println(intQ.first());
             Iterator<Integer> iteratorI = intQ.iterator();
-            iterateMe(intQ);
+            iterateMe(test);
+            System.out.println("Dequeue" + test.dequeue());
+            iterateMe(test);
         }
     }
 

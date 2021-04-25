@@ -87,7 +87,6 @@ public class GenericArrayList<T> implements IList<T>, Iterable<T>{
      */
     @Override
     public T set(int index, T element) {
-        System.out.println("GenericArrayList.set");
         T removed;
         if (index>size){
             throw new IndexOutOfBoundsException();
@@ -189,6 +188,22 @@ public class GenericArrayList<T> implements IList<T>, Iterable<T>{
     public Iterator<T> iterator() {
         return new GenericArrayListIterator();
     }
+
+    @Override
+    public void rotate(int distance) {
+        for (int i = 0; i < distance; i++) {
+
+            // take out the first element
+            T temp = get(0);
+            for (int j = 0; j < size() - 1; j++) {
+
+                // shift array elements towards left by 1 place
+                set(j,get(j+1));
+            }
+            set(size()-1, temp);
+        }
+    }
+
     //This is an inner-class of the GenericArrayList class
     class GenericArrayListIterator implements Iterator<T>{
         private int cursor = 0;

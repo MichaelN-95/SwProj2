@@ -224,6 +224,21 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
         return new GenericLinkedListIterator();
     }
 
+    @Override
+    public void rotate(int distance) {
+        for (int i = 0; i < distance; i++) {
+
+            // take out the first element
+            T temp = get(0);
+            for (int j = 0; j < size() - 1; j++) {
+
+                // shift array elements towards left by 1 place
+                set(j,get(j+1));
+            }
+            set(size()-1, temp);
+        }
+    }
+
     class GenericLinkedListIterator implements Iterator<T>{
         int cursor = 0;
         @Override

@@ -36,6 +36,8 @@ public interface IList <T> extends Iterable<T> {
      */
     public boolean contains(T element);
 
-//    public Iterator<T> iterator();
+    public Iterator<T> iterator();
+
+    public void rotate(int distance);
 
 }
