@@ -3,7 +3,8 @@
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 public class GenericArrayList<T> implements IList<T> {
 
@@ -57,7 +58,10 @@ public class GenericArrayList<T> implements IList<T> {
 
             //shuffle everything up from right to left //Note that this is a much easier mechanism to implement than trying to insert the new
             //element and then shuffle everything from left to right
-            if (size - index >= 0) System.arraycopy(buffer, index, buffer, index + 1, size - index);
+            for (int i = size; i > index; i--)
+            {
+                buffer[i] = buffer[i-1];
+            }
 
             //Now everything has moved up we can simply insert the new element
             buffer[index] = elem;

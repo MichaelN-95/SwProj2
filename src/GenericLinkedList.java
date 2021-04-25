@@ -23,11 +23,6 @@ public class GenericLinkedList<T> implements IList<T> {
     }
 
     @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
     public T remove(int index) {
 
 //        System.out.println("index called");

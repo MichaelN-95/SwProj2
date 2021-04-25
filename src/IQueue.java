@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 public interface IQueue<T> {
     /**
      * Inserts the specified element into the queue
@@ -25,6 +23,4 @@ public interface IQueue<T> {
      * no items; {@code false} otherwise.
      */
     public boolean empty();
-
-    public Iterator<T> iterator();
 }
