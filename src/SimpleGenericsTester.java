@@ -6,8 +6,16 @@ import java.util.Stack;
 public class SimpleGenericsTester {
     public static void main(String[] args) {
 //        arrayListTest(true);
-//        linkedListTest(true);
-//        stackTest(true);
+        try {
+//            linkedListTest(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            stackTest(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        queueTest(true);
 
     }
@@ -18,7 +26,7 @@ public class SimpleGenericsTester {
             GenericLinkedList<Integer> anIntList = new GenericLinkedList<>();
             anIntList.add(1);
             anIntList.add(2);
-            anIntList.addToStart(3);
+            anIntList.add(3);
             Iterator<Integer> iteratorI = anIntList.iterator();
 
             //setting a string list to test with
@@ -73,20 +81,21 @@ public class SimpleGenericsTester {
         }
     }
 
-    private static void stackTest(boolean b) throws Exception {
+    private static <T> void stackTest(boolean b) throws Exception {
        if (b) {
+           GenericLinkedList<Integer> anIntList = new GenericLinkedList<>();
+           GenericStack<Integer> test = new GenericStack<Integer>(anIntList);
            GenericStack<Integer> numStack = new GenericStack<>();
            numStack.push(2);numStack.push(6);numStack.push(9);numStack.push(69);
+           iterateMe(numStack);
            GenericStack<String> strStack = new GenericStack<>();
 
-           strStack.push("michael");strStack.push("fionn");strStack.push("kerri");
-           System.out.println(numStack.pop());
-           System.out.println(numStack.peek());
+           test.push(1);test.push(2); test.push(3);
+           strStack.push("michael");strStack.push("Fionn");strStack.push("kerri");
+           System.out.println("popped " +test.pop());
+//           System.out.println("PEEKED " + test.peek());
 
-           /* setting up and iterating through items  */
-           Iterator<Integer> iteratorI = numStack.iterator();
-           Iterator<String> iteratorS = strStack.iterator();
-
+           iterateMe(test);
            iterateMe(numStack);
            iterateMe(strStack);
        }
@@ -97,6 +106,8 @@ public class SimpleGenericsTester {
         if (b){
             GenericQueue<Integer> intQ = new GenericQueue<Integer>();
 
+            //fix this
+//            GenericStack<Integer> test = new GenericStack<Integer>(anIntList);
             intQ.enqueue(1);intQ.enqueue(22);intQ.enqueue(69);
 
             System.out.println(intQ.first());

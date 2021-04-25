@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 public class GenericQueue<T> implements IQueue<T>, Iterable<T>{
 
-    private final GenericArrayList<T> queue ;
+    IList <T> queue ;
 
     public GenericQueue() {
         queue= new GenericArrayList<T>();

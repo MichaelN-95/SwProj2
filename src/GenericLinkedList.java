@@ -10,13 +10,6 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
     Node tail; // tail of list
     int size; //size of list
 
-    public void addToStart(T elem) {
-        Node newNode = new Node(elem);
-        newNode.next = head;
-        head = newNode;
-        size++;
-    }
-
     @Override
     public int size() {
     return size;
@@ -31,7 +24,7 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
         Node trailer ; // the previous node
         Node removed;
         try {
-            if (index == 1) // The head of the list is deleted
+            if (index == 0) // The head of the list is deleted
             {
                 removed = head;
                 head = head.next; // The next node becomes the new head
@@ -150,8 +143,11 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
         }
         Node trailing = null, current;
 
-        if (index ==1){
-            head.data = element;
+        if (index ==0){
+            Node newNode = new Node(element);
+            newNode.next = head;
+            head = newNode;
+            size++;
         }
         else {
             counter = 1; //beginning of the list
@@ -164,6 +160,7 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             }
             trailing.next.data = element;
         }
+
     }
 
     @Override

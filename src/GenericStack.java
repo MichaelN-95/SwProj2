@@ -2,9 +2,13 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class GenericStack<T> implements IStack<T>, Iterable<T>{
-    private GenericLinkedList<T> stack = null;
+    IList <T>stack;
     public GenericStack() {
-        stack= new GenericLinkedList<T>();
+        stack= new GenericArrayList<>();
+    }
+
+    public GenericStack(GenericLinkedList<T> linkedList) {
+        stack = linkedList;
     }
 
     /**
@@ -14,7 +18,7 @@ public class GenericStack<T> implements IStack<T>, Iterable<T>{
      */
     @Override
     public void push(T element) {
-        stack.addToStart(element);
+        stack.add(0,element);
     }
 
     /**
@@ -26,7 +30,7 @@ public class GenericStack<T> implements IStack<T>, Iterable<T>{
     @Override
     public T pop() {
 
-        return stack.remove(1);
+        return this.stack.remove(0);
     }
 
     /**
@@ -41,7 +45,6 @@ public class GenericStack<T> implements IStack<T>, Iterable<T>{
 
             throw new NoSuchElementException();
         }
-        System.out.println(stack.toString());
         return stack.get(1);
     }
 
@@ -53,40 +56,11 @@ public class GenericStack<T> implements IStack<T>, Iterable<T>{
      */
     @Override
     public boolean empty() {
-        return stack.size==0;
+        return stack.size()==0;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new GenericStackIterator<T>();
+        return stack.iterator();
     }
-
-    class GenericStackIterator<T> implements Iterator<T>{
-        int cursor = 0;
-        /**
-         * Returns {@code true} if the iteration has more elements.
-         * (In other words, returns {@code true} if {@link #next} would
-         * return an element rather than throwing an exception.)
-         *
-         * @return {@code true} if the iteration has more elements
-         */
-        @Override
-        public boolean hasNext() {
-             return cursor < stack.size;
-        }
-
-        /**
-         * Returns the next element in the iteration.
-         *
-         * @return the next element in the iteration
-         * @throws NoSuchElementException if the iteration has no more elements
-         */
-        @Override
-        public T next() {
-            if (cursor== stack.size)throw new NoSuchElementException();
-            cursor++;
-            return (T) stack.get(cursor);
-        }
-    }
-
 }
