@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public interface IStack <T>{
+public interface IStack <T> extends Iterable<T>{
 
     /**
      * Pushes an item onto the top of this stack

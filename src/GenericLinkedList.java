@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 //TODO Clean up code and comment
 
-public class GenericLinkedList<T> implements IList<T> {
+public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
     Node head; // head of list
     Node tail; // tail of list
     int size; //size of list

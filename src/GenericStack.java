@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class GenericStack<T> implements IStack<T>{
+public class GenericStack<T> implements IStack<T>, Iterable<T>{
     private GenericLinkedList<T> stack = null;
     public GenericStack() {
         stack= new GenericLinkedList<T>();

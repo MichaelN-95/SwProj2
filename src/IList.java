@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public interface IList <T> extends Iterable {
+public interface IList <T> extends Iterable<T> {
     /**
      * Add an element to the end of the list
      * @param elem element to be added
@@ -36,6 +36,6 @@ public interface IList <T> extends Iterable {
      */
     public boolean contains(T element);
 
-    public Iterator<T> iterator();
+//    public Iterator<T> iterator();
 
 }

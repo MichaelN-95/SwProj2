@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class GenericArrayList<T> implements IList<T>{
+public class GenericArrayList<T> implements IList<T>, Iterable<T>{
 
     //This will hold our data - remember an ArrayList is nothing more than a managed array
     private T[] buffer;

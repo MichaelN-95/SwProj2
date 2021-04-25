@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public interface IQueue<T> {
+public interface IQueue<T> extends Iterable<T> {
     /**
      * Inserts the specified element into the queue
      * @param element the element argument.

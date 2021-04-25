@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Stack;
 
 public class SimpleGenericsTester {
     public static void main(String[] args) {
-        arrayListTest(false);
+//        arrayListTest(true);
 //        linkedListTest(true);
-        stackTest(true);
-        queueTest(true);
+//        stackTest(true);
+//        queueTest(true);
 
     }
 
-    private static void linkedListTest(boolean b){
+    private static void linkedListTest(boolean b) throws Exception {
         if(b){
             //setting an int list to test with
             GenericLinkedList<Integer> anIntList = new GenericLinkedList<>();
@@ -26,19 +27,26 @@ public class SimpleGenericsTester {
             aStringList.add("Second add");
             aStringList.add("Third add");
             Iterator<String> iteratorS = aStringList.iterator();
-            iterateString(iteratorS);
-
+            iterateMe(aStringList);
+            iterateMe(aStringList);
             aStringList.set(1, "Replaced");
-            iteratorS = aStringList.iterator();
-            iterateString(iteratorS);
+//            iteratorS = aStringList.iterator();
+//            iterateString(iteratorS);
+//
+//            for(Object strings: aStringList){
+//                System.out.println(strings);
+//            }
+
+            iterateMe(aStringList);
+
 
         }
     }
 
-    private static void arrayListTest(boolean b){
+    private static void arrayListTest(boolean b) throws Exception {
         //setting up values for generic arraylist & printing them
         if(b) {
-            GenericArrayList<Integer> aList = new GenericArrayList<>();
+            GenericArrayList<Integer> aList = new GenericArrayList<Integer>();
             GenericArrayList<String> aSList = new GenericArrayList<>();
             Stack<Integer> stack = new Stack<>();
             aList.add(1);
@@ -51,16 +59,23 @@ public class SimpleGenericsTester {
             aSList.add("Kerri");
 
             Iterator<Integer> iteratorI = aList.iterator();
-            iterateInt(iteratorI);
+            iterateMe(aList);
             System.out.println(aList.set(1, 69));
             iteratorI = aList.iterator();
-            iterateInt(iteratorI);
+            iterateMe(aList);
+
+            for (Integer ints:
+            aList){
+                System.out.println(ints);
+            }
+
+            iterateMe(aList);
         }
     }
 
-    private static void stackTest(boolean b){
+    private static void stackTest(boolean b) throws Exception {
        if (b) {
-           GenericStack<Integer> numStack = new GenericStack<Integer>();
+           GenericStack<Integer> numStack = new GenericStack<>();
            numStack.push(2);numStack.push(6);numStack.push(9);numStack.push(69);
            GenericStack<String> strStack = new GenericStack<>();
 
@@ -71,13 +86,14 @@ public class SimpleGenericsTester {
            /* setting up and iterating through items  */
            Iterator<Integer> iteratorI = numStack.iterator();
            Iterator<String> iteratorS = strStack.iterator();
-           iterateInt(iteratorI);
-           iterateString(iteratorS);
+
+           iterateMe(numStack);
+           iterateMe(strStack);
        }
 
     }
 
-    private static void queueTest(boolean b){
+    private static void queueTest(boolean b) throws Exception {
         if (b){
             GenericQueue<Integer> intQ = new GenericQueue<Integer>();
 
@@ -85,25 +101,33 @@ public class SimpleGenericsTester {
 
             System.out.println(intQ.first());
             Iterator<Integer> iteratorI = intQ.iterator();
-            iterateInt(iteratorI);
+            iterateMe(intQ);
         }
     }
 
-    //Dedicated methods receive iterator and go through each element
-    private static void iterateInt(Iterator<Integer> b){
-        while(b.hasNext())
-        {
-            System.out.print(b.next() + " ");
-        }
-        System.out.println("\n");
-    }
-
-    private static void iterateString(Iterator<String> b){
-        while(b.hasNext())
-        {
-            System.out.print(b.next() + " ");
+    //Stack dedicated iterate method
+    private static <T> void iterateMe(IStack<T> stack) throws Exception {
+        for (T details: stack){
+            System.out.println(details);
         }
         System.out.println("\n");
     }
 
+    //queue dedicated iterate method
+    private static <T> void iterateMe(GenericQueue<T> queue) throws Exception {
+        for (T details:
+                queue){
+            System.out.println(details);
+        }
+        System.out.println("\n");
+    }
+
+    //Lists dedicated iterate method
+    private static <T> void iterateMe(IList<T> lists) throws Exception{
+        for (T details:
+                lists){
+            System.out.println(details);
+        }
+        System.out.println("\n");
+    }
 }

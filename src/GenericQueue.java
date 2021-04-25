@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class GenericQueue<T> implements IQueue<T>{
+public class GenericQueue<T> implements IQueue<T>, Iterable<T>{
 
     private final GenericArrayList<T> queue ;
 
