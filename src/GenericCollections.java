@@ -26,7 +26,19 @@ public class GenericCollections {
      * NoSuchElementException - if the collection is empty.
      */
     public static <T extends Comparable<T>> T max(IList<T> list){
-        return null;
+        T max = list.get(0 );
+        for (int i = 0; i < list.size(); i++){
+            for (int j = 0; j < (list.size() - 1 - i); j++)
+            {
+                //if left value is greater than right value
+                if (list.get(j).compareTo(list.get(j+1)) < 0)
+                {
+                    //swap values
+                    max= list.get(i);
+                }
+            }
+        }
+        return max;
     }
     /**
      *

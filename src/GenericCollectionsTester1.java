@@ -19,11 +19,12 @@ public class GenericCollectionsTester1 {
 
         GenericCollections.sort(testList);
         //This method uses compareTo() to do its job
-//        GenericCollections.sort(myList);
+        GenericCollections.sort(myList);
+//        printList("\nSorted List based on natural ordering (age):", testList);
         printList("\nSorted List based on natural ordering (age):", testList);
 //        GenericCollections.rotate2(myList, 2);
 //        printList("\nList rotated by two:", myList);
-//        System.out.println("\nThe oldest person is " + GenericCollections.max(myList));
+        System.out.println("\nThe oldest person is " + GenericCollections.max(myList));
     }
     public static void printList(String message, GenericArrayList<Person> listToPrint)
     {

@@ -1,9 +1,5 @@
-
-//TODO Clean up code and comment
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 
 public class GenericArrayList<T> implements IList<T>, Iterable<T>{
 
