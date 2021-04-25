@@ -3,10 +3,9 @@
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
-public class GenericArrayList<T> implements IList<T> {
+
+public class GenericArrayList<T> implements IList<T>{
 
     //This will hold our data - remember an ArrayList is nothing more than a managed array
     private T[] buffer;
@@ -42,7 +41,6 @@ public class GenericArrayList<T> implements IList<T> {
         buffer[size++] = elem;
     }
 
-
     /**
      * Add an element to a specified index. Make sure to avoid adding beyond the end of the
      * array (no gaps or bufferOverflows).
@@ -58,10 +56,7 @@ public class GenericArrayList<T> implements IList<T> {
 
             //shuffle everything up from right to left //Note that this is a much easier mechanism to implement than trying to insert the new
             //element and then shuffle everything from left to right
-            for (int i = size; i > index; i--)
-            {
-                buffer[i] = buffer[i-1];
-            }
+            if (size - index >= 0) System.arraycopy(buffer, index, buffer, index + 1, size - index);
 
             //Now everything has moved up we can simply insert the new element
             buffer[index] = elem;
@@ -83,6 +78,25 @@ public class GenericArrayList<T> implements IList<T> {
         return buffer[index];
     }
 
+    /**
+     * Replaces the element at the specified position in this list with the specified element
+     *
+     * @param index   index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return the element previously at the specified position
+     */
+    @Override
+    public T set(int index, T element) {
+        System.out.println("GenericArrayList.set");
+        T removed;
+        if (index>size){
+            throw new IndexOutOfBoundsException();
+        }else {
+            removed = buffer[index];
+            buffer[index] = element;
+        }
+        return removed;
+    }
 
     /**
      * Searches through the array to see if a matching element is present
@@ -91,8 +105,7 @@ public class GenericArrayList<T> implements IList<T> {
      * @return whether the element was present in the list or not
      */
     @Override
-    public boolean contains(T elem)
-    {
+    public boolean contains(T elem) {
         boolean matchFound = false;
         for (int index = 0; index <= size && !matchFound; index++){
             if(buffer[index].equals(elem)){
@@ -101,8 +114,6 @@ public class GenericArrayList<T> implements IList<T> {
         }
         return matchFound;
     }
-
-
 
     /**
      *
@@ -119,8 +130,7 @@ public class GenericArrayList<T> implements IList<T> {
      * @return the size (i.e. the number of elements stored) in the list
      */
     @Override
-    public int size()
-    {
+    public int size() {
         //System.out.println(buffer.length);
         return size;
     }
@@ -173,18 +183,6 @@ public class GenericArrayList<T> implements IList<T> {
             //Now, update so that our managed array points at the newly created array
             buffer = tempArr;
         }
-    }
-
-    @Override
-    public String toString()
-    {
-        String data = "";
-        for(int i = 0; i < size; i++)
-        {
-            data += " " +buffer[i] + ",";
-        }
-
-        return "MyStringArrayList[" + data + " ]";
     }
 
     @Override

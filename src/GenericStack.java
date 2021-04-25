@@ -88,10 +88,5 @@ public class GenericStack<T> implements IStack<T>{
             return (T) stack.get(cursor);
         }
     }
-    @Override
-    public String toString() {
-        return "GenericStack{" +
-                "stack=" + stack.toString()+
-                '}';
-    }
+
 }

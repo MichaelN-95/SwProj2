@@ -143,6 +143,30 @@ public class GenericLinkedList<T> implements IList<T> {
     }
 
     @Override
+    public void add(int index, T element) {
+        int counter = 0;
+        if (index>size){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        Node trailing = null, current;
+
+        if (index ==1){
+            head.data = element;
+        }
+        else {
+            counter = 1; //beginning of the list
+            current = head;
+            while (counter != index) //while the position has not been found
+            {
+                trailing = current;
+                current = current.next;
+                counter++;
+            }
+            trailing.next.data = element;
+        }
+    }
+
+    @Override
     public T get(int i) {
         int counter;
         Node current;
@@ -165,13 +189,37 @@ public class GenericLinkedList<T> implements IList<T> {
         }
     }
 
-    public void printList() {
-        //us this to "walk" or traverse the list
-        Node current = head;
-        while(current != null){
-            System.out.print(current.data + ", ");
-            current = current.next;
+    /**
+     * Replaces the element at the specified position in this list with the specified element
+     *
+     * @param index   index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return the element previously at the specified position
+     */
+    @Override
+    public T set(int index, T element) {
+        int counter = 0;
+        if (index>size){
+            throw new ArrayIndexOutOfBoundsException();
         }
+        Node trailing = null, current;
+
+        if (index ==1){
+            current = head;
+            head.data = element;
+        }
+        else {
+            counter = 1; //beginning of the list
+            current = head;
+            while (counter != index) //while the position has not been found
+            {
+                trailing = current;
+                current = current.next;
+                counter++;
+            }
+            trailing.next.data = element;
+        }
+        return current.data;
     }
 
     @Override

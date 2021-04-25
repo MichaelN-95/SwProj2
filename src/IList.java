@@ -6,7 +6,15 @@ public interface IList <T> extends Iterable {
      * @param elem element to be added
      */
     public void add(T elem); //add to the end of the list
+    public void add(int index, T element);
     public T get(int index);//throws an IndexOutOfBoundsException where appropriate
+    /**
+     * Replaces the element at the specified position in this list with the specified element
+     * @param index index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return the element previously at the specified position
+     */
+    public T set(int index, T element);//throws an IndexOutOfBounds exception where appropriate
     public int size();
     /**
      *
